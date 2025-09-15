@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 ml_env
+classifier-model/cifar100_model.pth
