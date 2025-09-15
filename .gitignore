@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+ml_env
+classifier-model/cifar100_model.pth
