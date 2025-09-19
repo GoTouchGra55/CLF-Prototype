@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
+import api from "./lib/api";
 
 const Core = () => {
   const webcamRef = useRef(null);
@@ -18,15 +19,12 @@ const Core = () => {
       const formData = new FormData();
       formData.append("file", blob, "capture.jpg");
 
-      const response = await fetch("http://127.0.0.1:8000/predict-image", {
-        method: "POST",
-        body: formData
-      })
-
-      const data = await response.json();
+      const response = await api.post("/predict", formData);
+      console.log(response.data);
+      const data = response.data; // no await here
       setPrediction(data);
     } catch (err) {
-      throw new Error("Failed to upload image", err);
+      console.error("Failed to upload image", err);
     }
   };
 
@@ -46,12 +44,15 @@ const Core = () => {
           screenshotFormat="image/jpeg"
           className="border-1 rounded-2xl"
         />
-        <Button onClick={capture} className="w-full mt-3 py-6 text-2xl cursor-pointer">
+        <Button
+          onClick={capture}
+          className="w-full mt-3 py-6 text-2xl cursor-pointer"
+        >
           Predict
         </Button>
       </div>
       <div>
-        {(captImage && prediction) && (
+        {captImage && prediction && (
           <div className="mb-5 sm:mb-0">
             <img
               src={captImage}

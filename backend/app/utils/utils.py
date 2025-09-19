@@ -32,4 +32,4 @@ transform = transforms.Compose([
 ])
 
 def preprocess_image(image):
-    return transform(image).unsqueeze(0)  # add batch dimension
+    return transform(image).unsqueeze(0)
