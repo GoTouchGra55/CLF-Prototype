@@ -1,6 +1,5 @@
 import io
 import torch
-import uvicorn
 from PIL import Image
 from models.model import get_model
 from fastapi import FastAPI, File, UploadFile
@@ -17,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = get_model(checkpoint_path="../../model/cifar100_model.pth")
+model = get_model(checkpoint_path="../model/cifar100_model.pth")
 model.eval()
 
 @app.get("/")
@@ -43,6 +42,3 @@ async def predict(file: UploadFile = File(...)):
   class_name = cifar100_classes[class_idx]
 
   return {"class_name": class_name}
-
-if __name__ == "__main__":
-  uvicorn.run(app, host="localhost", port=3000)
