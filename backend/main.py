@@ -1,10 +1,10 @@
 import io
 import torch
 from PIL import Image
-from app.models.model import get_model
+from models.model import get_model
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from app.utils.utils import preprocess_image, cifar100_classes
+from utils.utils import preprocess_image, cifar100_classes
 
 app = FastAPI()
 
