@@ -16,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = get_model(checkpoint_path="../model/cifar100_model.pth")
+model = get_model(checkpoint_path="model/cifar100_model.pth")
 model.eval()
 
 @app.get("/")
